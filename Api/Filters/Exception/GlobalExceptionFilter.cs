@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace Api.Filters
+namespace Api.Filters.Exception
 {
     public class GlobalExceptionFilter : IExceptionFilter
     {

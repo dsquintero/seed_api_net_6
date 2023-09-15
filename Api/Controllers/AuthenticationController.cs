@@ -1,6 +1,6 @@
 ﻿using Api.DTOs;
+using Api.Filters.Attributes;
 using Api.Interfaces;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
@@ -32,7 +32,8 @@ namespace Api.Controllers
             return Ok(await authenticationService.Refresh(refreshRequest));
         }
 
-        [Authorize]
+        //[Authorize]
+        [JwtAuthorize]
         [HttpPost]
         [Route("Logout")]
         public async Task<IActionResult> Logout()

@@ -11,6 +11,7 @@ namespace Api.Services
         private readonly IPasswordHasherService passwordHasher;
         private readonly IMapper mapper;
         private readonly JwtService jwt;
+        private readonly IJwtValidator jwtValidator;
         private readonly IRefreshTokenRepository refreshTokenRepository;
 
         public AuthenticationService(
@@ -18,12 +19,14 @@ namespace Api.Services
             IPasswordHasherService passwordHasher,
             IMapper mapper,
             JwtService jwt,
+            IJwtValidator jwtValidator,
             IRefreshTokenRepository refreshTokenRepository)
         {
             this.authenticationRepository = authenticationRepository;
             this.passwordHasher = passwordHasher;
             this.mapper = mapper;
             this.jwt = jwt;
+            this.jwtValidator = jwtValidator;
             this.refreshTokenRepository = refreshTokenRepository;
         }
 
@@ -49,7 +52,7 @@ namespace Api.Services
         }
         public async Task<AuthenticatedResponse> Refresh(RefreshRequest refreshRequest)
         {
-            bool isValidRefreshToken = jwt.RefreshTokenValidate(refreshRequest.RefreshToken);
+            bool isValidRefreshToken = jwtValidator.RefreshTokenIsValid(refreshRequest.RefreshToken);
             if (!isValidRefreshToken)
             {
                 throw new InvalidOperationException("Invalid refresh token.");

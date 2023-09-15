@@ -13,5 +13,6 @@
         public double JWT_RefreshTokenExpirationMinutes { get; set; }
         public string JWT_Issuer { get; set; }
         public string JWT_Audience { get; set; }
+        public string X_Api_Key { get; set; }
     }
 }

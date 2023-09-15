@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 
-namespace Api.Filters
+namespace Api.Filters.Action
 {
-    public class ValidationAttributeFilter : IActionFilter
+    public class ValidationAttributeActionFilter : IActionFilter
     {
         public void OnActionExecuting(ActionExecutingContext context)
         {

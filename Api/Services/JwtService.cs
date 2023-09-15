@@ -17,31 +17,6 @@ namespace Api.Services
         }
 
         #region RefreshToken
-        public bool RefreshTokenValidate(string refreshToken)
-        {
-            TokenValidationParameters validationParameters = new TokenValidationParameters()
-            {
-                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(env.JWT_RefreshTokenSecret)),
-                ValidIssuer = env.JWT_Issuer,
-                ValidAudience = env.JWT_Audience,
-                ValidateIssuerSigningKey = true,
-                ValidateIssuer = true,
-                ValidateAudience = true,
-                ClockSkew = TimeSpan.Zero
-
-            };
-            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
-            try
-            {
-                tokenHandler.ValidateToken(refreshToken, validationParameters, out SecurityToken validatedToken);
-                return true;
-            }
-            catch (Exception)
-            {
-
-                return false;
-            }
-        }
         public string GenerateRefreshToken()
         {
             return GenerateToken(

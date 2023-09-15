@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc.Filters;
 using System.Net;
 using System.Text;
 
-namespace Api.Filters
+namespace Api.Filters.Exception
 {
     public class GlobalExceptionFilter2 : IExceptionFilter
     {
         public void OnException(ExceptionContext context)
         {
             int statusCode;
-            Exception ex = context.Exception;
+            System.Exception ex = context.Exception;
 
             switch (true)
             {
@@ -41,7 +41,7 @@ namespace Api.Filters
                 )
                 { StatusCode = statusCode };
         }
-        private string ExceptionMessage(Exception ex)
+        private string ExceptionMessage(System.Exception ex)
         {
             var sb = new StringBuilder();
             var innerEx = ex.InnerException;
@@ -53,7 +53,7 @@ namespace Api.Filters
 
             return sb.Length > 0 ? sb.ToString() : ex.Message;
         }
-        private string ExceptionMessageStackTrace(Exception ex)
+        private string ExceptionMessageStackTrace(System.Exception ex)
         {
             var sb = new StringBuilder();
             var innerEx = ex.InnerException;
@@ -66,7 +66,7 @@ namespace Api.Filters
             sb.AppendLine(ex.StackTrace);
             return sb.ToString();
         }
-        private string ExceptionStackTrace(Exception ex)
+        private string ExceptionStackTrace(System.Exception ex)
         {
             var sb = new StringBuilder();
             var innerEx = ex.InnerException;
